@@ -1,4 +1,4 @@
-package leetcode0003
+package leetcode0004
 
 func max(x int, y int) int {
 	if x > y {
