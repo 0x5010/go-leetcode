@@ -1,4 +1,4 @@
-package leetcode00010
+package leetcode0010
 
 func isMatch(s string, p string) bool {
 	sLen, pLen := len(s), len(p)
