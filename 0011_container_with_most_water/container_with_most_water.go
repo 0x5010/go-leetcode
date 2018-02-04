@@ -13,6 +13,7 @@ func min(x int, y int) int {
 	}
 	return y
 }
+
 func maxArea(height []int) int {
 	maxarea, l, r := 0, 0, len(height)-1
 	for l < r {
