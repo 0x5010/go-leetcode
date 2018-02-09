@@ -10,7 +10,7 @@ func search(nums []int, target int) int {
 		maxIndex++
 	}
 
-	for l, r := 0, numsLen-1; l <= r; {
+	for l, r := 0, numsLen; l < r; {
 		m := (l + r) / 2
 		index = m + maxIndex + 1
 		if index >= numsLen {
@@ -18,7 +18,7 @@ func search(nums []int, target int) int {
 		}
 
 		if nums[index] > target {
-			r = m - 1
+			r = m
 		} else if nums[index] < target {
 			l = m + 1
 		} else {
