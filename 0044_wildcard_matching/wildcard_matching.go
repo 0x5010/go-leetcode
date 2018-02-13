@@ -14,6 +14,7 @@ func isMatch(s string, p string) bool {
 			dp[0][i] = dp[0][i-1]
 		}
 	}
+
 	for i := 1; i <= sLen; i++ {
 		for j := 1; j <= pLen; j++ {
 			if p[j-1] != '*' {
