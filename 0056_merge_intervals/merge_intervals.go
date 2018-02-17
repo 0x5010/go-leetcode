@@ -30,7 +30,7 @@ func merge(intervals []Interval) []Interval {
 			if cur.End > end {
 				end = cur.End
 			}
-			res = append(res[:len(res)-1], Interval{Start: previous.Start})
+			res = append(res[:len(res)-1], Interval{Start: previous.Start, End: end})
 		} else {
 			res = append(res, cur)
 		}
