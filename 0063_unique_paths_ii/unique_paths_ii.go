@@ -7,10 +7,7 @@ func uniquePathsWithObstacles(obstacleGrid [][]int) int {
 	}
 
 	n := len(obstacleGrid[0])
-	if n == 0 {
-		return 0
-	}
-	if obstacleGrid[0][0] != 0 {
+	if n == 0 || obstacleGrid[0][0] != 0 {
 		return 0
 	}
 
