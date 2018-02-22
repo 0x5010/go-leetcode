@@ -13,21 +13,20 @@ func fullJustify(words []string, maxWidth int) []string {
 			l += len(words[w]) + 1
 		}
 
-		tmp := []string{words[i]}
+		str := words[i]
 		space, extra := 1, 0
 		if w != i+1 && w != len(words) {
 			space = (maxWidth-l)/(w-i-1) + 1
 			extra = (maxWidth - l) % (w - i - 1)
 		}
 		for j := i + 1; j < w; j++ {
-			tmp = append(tmp, strings.Repeat(" ", space))
+			str += strings.Repeat(" ", space)
 			if extra > 0 {
-				tmp = append(tmp, " ")
+				str += " "
 				extra--
 			}
-			tmp = append(tmp, words[j])
+			str += words[j]
 		}
-		str := strings.Join(tmp, "")
 		str += strings.Repeat(" ", maxWidth-len(str))
 		res = append(res, str)
 	}
