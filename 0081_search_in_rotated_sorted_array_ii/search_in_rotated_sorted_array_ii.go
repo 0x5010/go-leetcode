@@ -1,13 +1,13 @@
 package leetcode0081
 
 func search(nums []int, target int) bool {
-	n := 0
+	n := len(nums)
 	if n == 0 {
 		return false
 	}
 
-	k := 0
-	for k < n-1 && nums[k] <= nums[k+1] {
+	k := 1
+	for k < n && nums[k-1] <= nums[k] {
 		k++
 	}
 
