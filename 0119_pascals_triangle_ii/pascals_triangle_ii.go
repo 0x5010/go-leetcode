@@ -1,4 +1,4 @@
-package leetcode00119
+package leetcode0119
 
 func getRow(rowIndex int) []int {
 	res := make([]int, 1, rowIndex+1)

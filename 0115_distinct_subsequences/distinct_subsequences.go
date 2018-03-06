@@ -1,4 +1,4 @@
-package leetcode00115
+package leetcode0115
 
 func numDistinct(s string, t string) int {
 	m, n := len(s), len(t)

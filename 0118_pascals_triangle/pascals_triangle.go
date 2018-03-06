@@ -1,4 +1,4 @@
-package leetcode00118
+package leetcode0118
 
 func generate(numRows int) [][]int {
 	if numRows == 0 {
