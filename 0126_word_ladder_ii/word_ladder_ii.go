@@ -12,7 +12,7 @@ func findLadders(beginWord string, endWord string, wordList []string) [][]string
 		return paths
 	}
 
-	wordSet, forward, backward := set(), set(), set()
+	wordSet, forward, backward := set(len(wordList)), set(1), set(1)
 
 	for _, w := range wordList {
 		wordSet[w] = exists
@@ -49,8 +49,8 @@ func findLadders(beginWord string, endWord string, wordList []string) [][]string
 	return paths
 }
 
-func set() map[string]struct{} {
-	return make(map[string]struct{})
+func set(n int) map[string]struct{} {
+	return make(map[string]struct{}, n)
 }
 
 func buildTree(
@@ -70,7 +70,7 @@ func buildTree(
 	for k := range backward {
 		delete(wordSet, k)
 	}
-	next := set()
+	next := set(0)
 	done := false
 	for it := range forward {
 		word := []byte(it)
