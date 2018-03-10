@@ -1,4 +1,4 @@
-package leetcode0138
+package leetcode0139
 
 func wordBreak(s string, wordDict []string) bool {
 	m := make(map[string]struct{}, len(wordDict))
