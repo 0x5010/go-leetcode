@@ -1,9 +1,9 @@
 package leetcode0139
 
 func wordBreak(s string, wordDict []string) bool {
-	m := make(map[string]struct{}, len(wordDict))
+	wordSet := make(map[string]struct{}, len(wordDict))
 	for _, w := range wordDict {
-		m[w] = struct{}{}
+		wordSet[w] = struct{}{}
 	}
 	n := len(s)
 	dp := make([]bool, n+1)
@@ -12,7 +12,7 @@ func wordBreak(s string, wordDict []string) bool {
 	for i := 1; i < n+1; i++ {
 		for j := 0; j < i; j++ {
 			if dp[j] {
-				if _, ok := m[s[j:i]]; ok {
+				if _, ok := wordSet[s[j:i]]; ok {
 					dp[i] = true
 					break
 				}
