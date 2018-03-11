@@ -10,9 +10,6 @@ package leetcode0144
  */
 
 func preorderTraversal(root *TreeNode) []int {
-	if root == nil {
-		return nil
-	}
 	res := []int{}
 	stack := []*TreeNode{}
 	p := root
