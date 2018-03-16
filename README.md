@@ -3,6 +3,6 @@
 
 do something for myself
 
-:negative_squared_cross_mark: 116,117,133,138,141,142,151,160,173
+:negative_squared_cross_mark: 116,117,133,138,141,142,151,160,173,175,176,177,178
 
 :lock: 156,157,158,159,161,163,170,186
