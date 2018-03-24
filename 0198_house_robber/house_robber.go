@@ -1,7 +1,7 @@
 package leetcode0198
 
 func rob(nums []int) int {
-	var a, b int
+	a, b := 0, 0
 	for i, num := range nums {
 		if i%2 == 0 {
 			a = max(a+num, b)
