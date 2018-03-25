@@ -44,16 +44,9 @@ func getSkyline(buildings [][]int) [][]int {
 
 type highHeap []int
 
-func (h highHeap) Len() int {
-	return len(h)
-}
-func (h highHeap) Less(i, j int) bool {
-	return h[i] > h[j]
-}
-
-func (h highHeap) Swap(i, j int) {
-	h[i], h[j] = h[j], h[i]
-}
+func (h highHeap) Len() int           { return len(h) }
+func (h highHeap) Less(i, j int) bool { return h[i] > h[j] }
+func (h highHeap) Swap(i, j int)      { h[i], h[j] = h[j], h[i] }
 
 func (h *highHeap) Push(x interface{}) {
 	*h = append(*h, x.(int))
