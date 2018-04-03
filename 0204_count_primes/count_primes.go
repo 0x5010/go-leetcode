@@ -1,9 +1,5 @@
 package leetcode0204
 
-import (
-	"math"
-)
-
 func countPrimes(n int) int {
 	if n < 3 {
 		return 0
@@ -11,7 +7,7 @@ func countPrimes(n int) int {
 
 	notPrime := make([]bool, n)
 	count := n / 2
-	for i := 3; i < int(math.Sqrt(float64(n)))+1; i += 2 {
+	for i := 3; i < mySqrt(n)+1; i += 2 {
 		if notPrime[i] {
 			continue
 		}
@@ -24,4 +20,26 @@ func countPrimes(n int) int {
 		}
 	}
 	return count
+}
+
+func mySqrt(x int) int {
+	if x <= 1 {
+		return x
+	}
+
+	low := 1
+	high := x
+	for low < high {
+		mid := (low + high) / 2
+		sq := mid * mid
+		if sq > x {
+			high = mid
+		} else if sq < x {
+			low = mid + 1
+		} else {
+			return mid
+		}
+	}
+
+	return high - 1
 }
