@@ -6,7 +6,7 @@ func numSquares(n int) int {
 	}
 
 	for n%4 == 0 {
-		n >>= 2
+		n /= 4
 	}
 
 	if n%8 == 7 {
