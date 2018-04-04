@@ -10,20 +10,20 @@ func wordPattern(pattern string, str string) bool {
 		return false
 	}
 	m := make(map[byte]string)
+	seen := make(map[string]struct{})
 	for i := 0; i < len(pattern); i++ {
-		c := pattern[i]
-		sub, ok := m[c]
+		c, s := pattern[i], words[i]
+		v, ok := m[c]
 		if ok {
-			if sub != words[i] {
+			if v != s {
 				return false
 			}
 		} else {
-			for _, v := range m {
-				if v == words[i] {
-					return false
-				}
+			if _, ok := seen[s]; ok {
+				return false
 			}
-			m[c] = words[i]
+			m[c] = s
+			seen[s] = struct{}{}
 		}
 	}
 	return true
