@@ -8,19 +8,19 @@ func getHint(secret string, guess string) string {
 	bulls, cows := 0, 0
 	nums := [10]int{}
 	for i := 0; i < len(secret); i++ {
-		s, g := secret[i], guess[i]
+		s, g := int(secret[i]-'0'), int(guess[i]-'0')
 		if s == g {
 			bulls++
 		} else {
-			si, gi := int(s)-'0', int(g)-'0'
-			if nums[si] < 0 {
+
+			if nums[s] < 0 {
 				cows++
 			}
-			if nums[gi] > 0 {
+			if nums[g] > 0 {
 				cows++
 			}
-			nums[si]++
-			nums[gi]--
+			nums[s]++
+			nums[g]--
 		}
 	}
 	return fmt.Sprintf("%dA%dB", bulls, cows)
