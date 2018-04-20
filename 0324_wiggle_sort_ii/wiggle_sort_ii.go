@@ -4,17 +4,29 @@ import "sort"
 
 func wiggleSort(nums []int) {
 	n := len(nums)
-	tmp := make([]int, n)
-	copy(tmp, nums)
-	sort.Ints(tmp)
+	sort.Ints(nums)
+	med := nums[n/2]
 
-	mid := n / 2
-
-	for i := 0; i < n; i++ {
-		if i < mid {
-			nums[2*i+1] = tmp[n-1-i]
+	i, l, r := 0, 0, n-1
+	for i <= r {
+		index := mapIndex(i, n)
+		if nums[index] > med {
+			swap(nums, mapIndex(l, n), index)
+			l++
+			i++
+		} else if nums[index] < med {
+			swap(nums, mapIndex(r, n), index)
+			r--
 		} else {
-			nums[2*(i-mid)] = tmp[n-1-i]
+			i++
 		}
 	}
+}
+
+func swap(nums []int, i, j int) {
+	nums[i], nums[j] = nums[j], nums[i]
+}
+
+func mapIndex(i, n int) int {
+	return (1 + 2*i) % (n | 1)
 }
