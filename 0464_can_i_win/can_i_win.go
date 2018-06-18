@@ -1,4 +1,4 @@
-package leetcode464
+package leetcode0464
 
 func canIWin(maxChoosableInteger int, desiredTotal int) bool {
 	sum := (1 + maxChoosableInteger) * maxChoosableInteger / 2

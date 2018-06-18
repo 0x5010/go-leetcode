@@ -1,4 +1,4 @@
-package leetcode461
+package leetcode0461
 
 func hammingDistance(x int, y int) int {
 	x ^= y

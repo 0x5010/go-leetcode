@@ -1,4 +1,4 @@
-package leetcode454
+package leetcode0454
 
 func fourSumCount(A []int, B []int, C []int, D []int) int {
 	res := 0

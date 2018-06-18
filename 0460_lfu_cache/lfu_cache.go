@@ -1,4 +1,4 @@
-package leetcode460
+package leetcode0460
 
 import (
 	"container/heap"

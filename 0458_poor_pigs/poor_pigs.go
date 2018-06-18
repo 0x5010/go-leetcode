@@ -1,4 +1,4 @@
-package leetcode458
+package leetcode0458
 
 func poorPigs(buckets int, minutesToDie int, minutesToTest int) int {
 	res := 0
