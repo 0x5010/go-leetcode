@@ -33,12 +33,12 @@ func makesquare(nums []int) bool {
 			if edges[i]+nums[index] > avg {
 				continue
 			}
-			j := i
+			j := i - 1
 			for j >= 0 {
-				j--
 				if edges[i] == edges[j] {
 					break
 				}
+				j--
 			}
 			if j != -1 {
 				continue
