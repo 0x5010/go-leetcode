@@ -29,7 +29,6 @@ func newWindow(nums []int, k int) *window {
 
 	for i := 0; i < k; i++ {
 		e := &entry{
-			index: i,
 			value: nums[i],
 		}
 
@@ -53,15 +52,14 @@ func newWindow(nums []int, k int) *window {
 
 func (w *window) update(popIdx, pushIdx, pushValue int) {
 	e := w.m[popIdx]
-	e.index = pushIdx
 	e.value = pushValue
 	w.m[pushIdx] = e
 
-	if e.heapIdx < len(w.max.intHeap) {
-		heap.Fix(w.max, e.heapIdx)
+	if e.index < len(w.max.intHeap) {
+		heap.Fix(w.max, e.index)
 	}
-	if e.heapIdx < len(w.min.intHeap) {
-		heap.Fix(w.min, e.heapIdx)
+	if e.index < len(w.min.intHeap) {
+		heap.Fix(w.min, e.index)
 	}
 
 	w.fix()
@@ -94,9 +92,8 @@ type maxHeap struct {
 func (h maxHeap) Less(i, j int) bool { return h.intHeap[i].value > h.intHeap[j].value }
 
 type entry struct {
-	index   int
-	value   int
-	heapIdx int
+	index int
+	value int
 }
 
 type intHeap []*entry
@@ -106,14 +103,14 @@ func (h intHeap) Less(i, j int) bool { return h[i].value < h[j].value }
 
 func (h intHeap) Swap(i, j int) {
 	h[i], h[j] = h[j], h[i]
-	h[i].heapIdx = i
-	h[j].heapIdx = j
+	h[i].index = i
+	h[j].index = j
 }
 
 func (h *intHeap) Push(x interface{}) {
 	n := len(*h)
 	e := x.(*entry)
-	e.heapIdx = n
+	e.index = n
 	*h = append(*h, e)
 }
 
