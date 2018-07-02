@@ -24,6 +24,7 @@ func findMode(root *TreeNode) []int {
 			cur++
 		} else {
 			cur = 1
+			pre = node.Val
 		}
 		if cur == max {
 			res = append(res, node.Val)
@@ -32,7 +33,6 @@ func findMode(root *TreeNode) []int {
 			res = []int{node.Val}
 		}
 
-		pre = node.Val
 		inorder(node.Right)
 	}
 
