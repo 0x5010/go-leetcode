@@ -18,8 +18,8 @@ func findFrequentTreeSum(root *TreeNode) []int {
 		if node == nil {
 			return 0
 		}
-		l, r := postorder(node.Left), postorder(node.Right)
-		sum := node.Val + l + r
+		sum := node.Val + postorder(node.Left) + postorder(node.Right)
+
 		m[sum]++
 		if m[sum] > max {
 			max = m[sum]
