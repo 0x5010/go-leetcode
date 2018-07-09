@@ -6,7 +6,6 @@ import (
 )
 
 func findMinDifference(timePoints []string) int {
-
 	m := map[int]struct{}{}
 	l := make([]int, 0, len(timePoints))
 	for _, timePoint := range timePoints {
