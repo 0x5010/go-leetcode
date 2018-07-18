@@ -26,15 +26,15 @@ func tree2str(t *TreeNode) string {
 		if node.Left == nil && node.Right == nil {
 			return
 		}
-		bs.WriteString("(")
+		bs.WriteByte('(')
 		if node.Left != nil {
 			dfs(node.Left)
 		}
-		bs.WriteString(")")
+		bs.WriteByte(')')
 		if node.Right != nil {
-			bs.WriteString("(")
+			bs.WriteByte('(')
 			dfs(node.Right)
-			bs.WriteString(")")
+			bs.WriteByte(')')
 		}
 	}
 	dfs(t)
