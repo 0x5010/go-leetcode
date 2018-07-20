@@ -9,17 +9,17 @@ func smallestRange(nums [][]int) []int {
 	arrPtrs := make([]int, len(nums))
 
 	max := 0
-	idx := 0
-	for idx < n {
-		arr := nums[idx]
-		arrPtr := arrPtrs[idx]
+	index := 0
+	for index < n {
+		arr := nums[index]
+		arrPtr := arrPtrs[index]
 		v := arr[arrPtr]
 		if v > max {
 			max = v
 		}
-		heap.Push(h, item{val: v, kth: idx})
-		arrPtrs[idx] = arrPtr + 1
-		idx++
+		heap.Push(h, item{val: v, kth: index})
+		arrPtrs[index] = arrPtr + 1
+		index++
 	}
 
 	minDiff := max - (*h)[0].val
