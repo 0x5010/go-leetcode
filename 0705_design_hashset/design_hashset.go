@@ -15,8 +15,7 @@ func Constructor() MyHashSet {
 }
 
 func (this *MyHashSet) Add(key int) {
-	n := this.len
-	if n <= key {
+	if this.len <= key {
 		l := 2 * key
 		if l > this.cap {
 			l = this.cap
