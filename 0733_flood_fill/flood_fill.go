@@ -7,19 +7,18 @@ func floodFill(image [][]int, sr int, sc int, newColor int) [][]int {
 		return image
 	}
 	m, n := len(image), len(image[0])
-	s := [][2]int{{sr, sc}}
-	for len(s) != 0 {
-		p := s[0]
-		s = s[1:]
-		image[p[0]][p[1]] = newColor
+	var fill func(int, int)
+	fill = func(r, c int) {
+		image[r][c] = newColor
 
 		for _, dir := range dirs {
-			x, y := p[0]+dir[0], p[1]+dir[1]
+			x, y := r+dir[0], c+dir[1]
 			if 0 <= x && x < m && 0 <= y && y < n &&
 				image[x][y] == oldColor {
-				s = append(s, [2]int{x, y})
+				fill(x, y)
 			}
 		}
 	}
+	fill(sr, sc)
 	return image
 }
