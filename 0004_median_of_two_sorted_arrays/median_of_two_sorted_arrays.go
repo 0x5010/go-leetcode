@@ -1,19 +1,5 @@
 package leetcode0004
 
-func max(x int, y int) int {
-	if x > y {
-		return x
-	}
-	return y
-}
-
-func min(x int, y int) int {
-	if x < y {
-		return x
-	}
-	return y
-}
-
 func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
 	m, n := len(nums1), len(nums2)
 	if m > n {
@@ -54,4 +40,18 @@ func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
 		}
 	}
 	return 0.0
+}
+
+func max(a int, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
+
+func min(a int, b int) int {
+	if a < b {
+		return a
+	}
+	return b
 }
