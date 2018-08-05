@@ -1,19 +1,5 @@
 package leetcode0011
 
-func max(x int, y int) int {
-	if x > y {
-		return x
-	}
-	return y
-}
-
-func min(x int, y int) int {
-	if x < y {
-		return x
-	}
-	return y
-}
-
 func maxArea(height []int) int {
 	maxarea, l, r := 0, 0, len(height)-1
 	for l < r {
@@ -25,4 +11,18 @@ func maxArea(height []int) int {
 		}
 	}
 	return maxarea
+}
+
+func max(a int, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
+
+func min(a int, b int) int {
+	if a < b {
+		return a
+	}
+	return b
 }
