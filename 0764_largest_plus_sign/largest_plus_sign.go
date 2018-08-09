@@ -15,27 +15,26 @@ func orderOfLargestPlusSign(N int, mines [][]int) int {
 				l = 0
 			} else {
 				l++
+				grid[i*N+j] = min(grid[i*N+j], l)
 			}
 			if grid[i*N+k] == 0 {
 				r = 0
 			} else {
 				r++
+				grid[i*N+k] = min(grid[i*N+k], r)
 			}
 			if grid[j*N+i] == 0 {
 				u = 0
 			} else {
 				u++
+				grid[j*N+i] = min(grid[j*N+i], u)
 			}
 			if grid[k*N+i] == 0 {
 				d = 0
 			} else {
 				d++
+				grid[k*N+i] = min(grid[k*N+i], d)
 			}
-
-			grid[i*N+j] = min(grid[i*N+j], l)
-			grid[i*N+k] = min(grid[i*N+k], r)
-			grid[j*N+i] = min(grid[j*N+i], u)
-			grid[k*N+i] = min(grid[k*N+i], d)
 		}
 	}
 	res := 0
