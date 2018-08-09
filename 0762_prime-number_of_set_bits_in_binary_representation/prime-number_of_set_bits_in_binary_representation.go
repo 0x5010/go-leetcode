@@ -1,14 +1,14 @@
 package leetcode0762
 
+import "math/bits"
+
 func countPrimeSetBits(L int, R int) int {
-	primes := [...]int{2: 1, 3: 1, 5: 1, 7: 1, 11: 1, 13: 1, 17: 1, 19: 1}
 	res := 0
 	for i := L; i <= R; i++ {
-		bits := 0
-		for n := i; n > 0; n >>= 1 {
-			bits += n & 1
+		switch bits.OnesCount32(uint32(i)) {
+		case 2, 3, 5, 7, 11, 13, 17, 19:
+			res++
 		}
-		res += primes[bits]
 	}
 	return res
 }
