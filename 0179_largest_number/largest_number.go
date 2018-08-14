@@ -11,16 +11,12 @@ func largestNumber(nums []int) string {
 	for i := range tmp {
 		tmp[i] = strconv.Itoa(nums[i])
 	}
-	sortByMerge(tmp)
+	sort.Slice(tmp, func(i, j int) bool {
+		return tmp[i]+tmp[j] > tmp[j]+tmp[i]
+	})
 	res := strings.Join(tmp, "")
 	if res[0] == '0' {
 		return "0"
 	}
 	return res
-}
-
-func sortByMerge(l []string) {
-	sort.Slice(l, func(i, j int) bool {
-		return l[i]+l[j] < l[j]+l[i]
-	})
 }
