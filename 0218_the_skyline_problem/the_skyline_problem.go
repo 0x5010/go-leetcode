@@ -18,7 +18,13 @@ func getSkyline(buildings [][]int) [][]int {
 		edges = append(edges, [2]int{b[0], -b[2]})
 		edges = append(edges, [2]int{b[1], b[2]})
 	}
-	sortByEdge(edges)
+	sort.Slice(edges, func(i, j int) bool {
+		a, b := edges[i], edges[j]
+		if a[0] == b[0] {
+			return a[1] < b[1]
+		}
+		return a[0] < b[0]
+	})
 
 	for _, e := range edges {
 		if e[1] < 0 {
@@ -56,14 +62,4 @@ func (h *highHeap) Pop() interface{} {
 	res := (*h)[len(*h)-1]
 	*h = (*h)[0 : len(*h)-1]
 	return res
-}
-
-func sortByEdge(edges [][2]int) {
-	sort.Slice(edges, func(i, j int) bool {
-		a, b := edges[i], edges[j]
-		if a[0] == b[0] {
-			return a[1] < b[1]
-		}
-		return a[0] < b[0]
-	})
 }
