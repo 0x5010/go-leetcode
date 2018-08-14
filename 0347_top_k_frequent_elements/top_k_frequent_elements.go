@@ -12,17 +12,13 @@ func topKFrequent(nums []int, k int) []int {
 	for num, count := range m {
 		counts = append(counts, [2]int{count, num})
 	}
-	sortByCount(counts)
+	sort.Slice(counts, func(i, j int) bool {
+		return counts[i][0] > counts[j][0]
+	})
 
 	res := make([]int, k)
 	for i := 0; i < k; i++ {
 		res[i] = counts[i][1]
 	}
 	return res
-}
-
-func sortByCount(counts [][2]int) {
-	sort.Slice(counts, func(i, j int) bool {
-		return counts[i][0] > counts[j][0]
-	})
 }
