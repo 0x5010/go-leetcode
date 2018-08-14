@@ -5,17 +5,6 @@ import (
 	"time"
 )
 
-type feed struct {
-	id   int
-	time int64
-}
-
-func sortByTime(feeds []feed) {
-	sort.Slice(feeds, func(i, j int) bool {
-		return feeds[i].time > feeds[j].time
-	})
-}
-
 type Twitter struct {
 	users  map[int][]feed
 	follow map[int]map[int]struct{}
@@ -47,7 +36,9 @@ func (this *Twitter) GetNewsFeed(userId int) []int {
 	for id := range this.follow[userId] {
 		tmp = append(tmp, this.users[id]...)
 	}
-	sortByTime(tmp)
+	sort.Slice(tmp, func(i, j int) bool {
+		return tmp[i].time > tmp[j].time
+	})
 
 	n := 10
 	if len(tmp) < n {
@@ -78,6 +69,11 @@ func (this *Twitter) Follow(followerId int, followeeId int) {
 /** Follower unfollows a followee. If the operation is invalid, it should be a no-op. */
 func (this *Twitter) Unfollow(followerId int, followeeId int) {
 	delete(this.follow[followerId], followeeId)
+}
+
+type feed struct {
+	id   int
+	time int64
 }
 
 /**
