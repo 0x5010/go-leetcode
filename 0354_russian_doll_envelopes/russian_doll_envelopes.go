@@ -8,7 +8,12 @@ func maxEnvelopes(envelopes [][]int) int {
 		return n
 	}
 
-	sortBySize(envelopes)
+	sort.Slice(envelopes, func(i, j int) bool {
+		if envelopes[i][0] == envelopes[j][0] {
+			return envelopes[i][1] > envelopes[j][1]
+		}
+		return envelopes[i][0] < envelopes[j][0]
+	})
 
 	dp := make([]int, n)
 	res := 1
@@ -22,13 +27,4 @@ func maxEnvelopes(envelopes [][]int) int {
 		}
 	}
 	return res
-}
-
-func sortBySize(envelopes [][]int) {
-	sort.Slice(envelopes, func(i, j int) bool {
-		if envelopes[i][0] == envelopes[j][0] {
-			return envelopes[i][1] > envelopes[j][1]
-		}
-		return envelopes[i][0] < envelopes[j][0]
-	})
 }
