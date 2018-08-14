@@ -19,7 +19,9 @@ func merge(intervals []Interval) []Interval {
 	} else if n == 1 {
 		return intervals
 	}
-	sortByStart(intervals)
+	sort.Slice(intervals, func(i, j int) bool {
+		return intervals[i].Start < intervals[j].Start
+	})
 
 	res := []Interval{intervals[0]}
 
@@ -36,12 +38,6 @@ func merge(intervals []Interval) []Interval {
 		}
 	}
 	return res
-}
-
-func sortByStart(intervals []Interval) {
-	sort.Slice(intervals, func(i, j int) bool {
-		return intervals[i].Start < intervals[j].Start
-	})
 }
 
 func max(a, b int) int {
