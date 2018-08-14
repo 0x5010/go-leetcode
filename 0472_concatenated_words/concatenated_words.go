@@ -5,7 +5,9 @@ import "sort"
 func findAllConcatenatedWordsInADict(words []string) []string {
 	res := []string{}
 	preWords := make(map[string]struct{})
-	sortByLen(words)
+	sort.Slice(words, func(i, j int) bool {
+		return len(words[i]) < len(words[j])
+	})
 	canFrom := func(word string) bool {
 		n := len(word)
 		if len(preWords) == 0 {
@@ -34,10 +36,4 @@ func findAllConcatenatedWordsInADict(words []string) []string {
 		preWords[word] = struct{}{}
 	}
 	return res
-}
-
-func sortByLen(words []string) {
-	sort.Slice(words, func(i, j int) bool {
-		return len(words[i]) < len(words[j])
-	})
 }
