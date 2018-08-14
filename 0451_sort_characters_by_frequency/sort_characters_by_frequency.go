@@ -12,7 +12,9 @@ func frequencySort(s string) string {
 		f.f++
 		freqs[b] = f
 	}
-	sortByLen(freqs)
+	sort.Slice(freqs, func(i, j int) bool {
+		return freqs[i].f > freqs[j].f
+	})
 	res := make([]byte, n)
 	i := 0
 	for _, f := range freqs {
@@ -30,10 +32,4 @@ func frequencySort(s string) string {
 type freq struct {
 	b byte
 	f int
-}
-
-func sortByLen(freqs []freq) {
-	sort.Slice(freqs, func(i, j int) bool {
-		return freqs[i].f > freqs[j].f
-	})
 }
