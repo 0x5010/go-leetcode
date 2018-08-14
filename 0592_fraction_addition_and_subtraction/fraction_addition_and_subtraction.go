@@ -64,9 +64,9 @@ func gcd(a, b int) int {
 	return gcd(b, a%b)
 }
 
-func abs(a int) int {
-	if a < 0 {
-		return -a
+func abs(i int) int {
+	if i < 0 {
+		return -i
 	}
-	return a
+	return i
 }
