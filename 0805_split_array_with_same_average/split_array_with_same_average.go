@@ -6,14 +6,13 @@ func splitArraySameAverage(A []int) bool {
 	for _, a := range A {
 		sum += a
 	}
-	possible := false
+	possible := []int{}
 	for i := 1; i <= m; i++ {
 		if sum*i%n == 0 {
-			possible = true
-			break
+			possible = append(possible, i)
 		}
 	}
-	if !possible {
+	if len(possible) == 0 {
 		return false
 	}
 	sums := make([][]map[int]struct{}, n)
@@ -34,13 +33,11 @@ func splitArraySameAverage(A []int) bool {
 			}
 		}
 	}
-	for j := 1; j <= m; j++ {
-		if sum*j%n == 0 {
-			target := sum * j / n
-			for i := 0; i < n; i++ {
-				if _, ok := sums[i][j][target]; ok {
-					return true
-				}
+	for _, j := range possible {
+		target := sum * j / n
+		for i := 0; i < n; i++ {
+			if _, ok := sums[i][j][target]; ok {
+				return true
 			}
 		}
 	}
