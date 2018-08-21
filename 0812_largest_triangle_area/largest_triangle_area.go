@@ -3,7 +3,7 @@ package leetcode0812
 import "math"
 
 func largestTriangleArea(points [][]int) float64 {
-	res := 0.0
+	res := 0.
 	n := len(points)
 	for i := 0; i < n; i++ {
 		for j := i + 1; j < n; j++ {
