@@ -2,7 +2,7 @@ package leetcode0786
 
 func kthSmallestPrimeFraction(A []int, K int) []int {
 	n := len(A)
-	l, h, p, q := 0.0, 1.0, 0, 1
+	l, h, p, q := 0., 1.0, 0, 1
 	for l < h {
 		mid := (l + h) / 2
 		count := 0
