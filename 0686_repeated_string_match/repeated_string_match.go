@@ -3,7 +3,7 @@ package leetcode0686
 import "strings"
 
 func repeatedStringMatch(A string, B string) int {
-	var s strings.Builder
+	s := strings.Builder{}
 	repeat := len(B) / len(A)
 	if len(B)%len(A) != 0 {
 		repeat++
