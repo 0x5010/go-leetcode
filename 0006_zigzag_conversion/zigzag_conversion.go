@@ -1,15 +1,13 @@
 package leetcode0006
 
-import (
-	"bytes"
-)
+import "strings"
 
 func convert(s string, numRows int) string {
 	if numRows == 1 || len(s) <= numRows {
 		return s
 	}
 
-	res := bytes.Buffer{}
+	res := strings.Builder{}
 
 	p := numRows*2 - 2
 
