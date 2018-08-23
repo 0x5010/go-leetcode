@@ -1,8 +1,6 @@
 package leetcode0038
 
-import (
-	"bytes"
-)
+import "strings"
 
 func countAndSay(n int) string {
 	if n == 0 {
@@ -13,7 +11,7 @@ func countAndSay(n int) string {
 		return res
 	}
 	for i := 1; i < n; i++ {
-		b := bytes.Buffer{}
+		b := strings.Builder{}
 		for j, count := 0, 1; j < len(res); j++ {
 			if j+1 == len(res) || res[j] != res[j+1] {
 				b.WriteByte(byte(count + '0'))
