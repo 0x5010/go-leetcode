@@ -1,10 +1,5 @@
 package leetcode0606
 
-import (
-	"bytes"
-	"strconv"
-)
-
 /**
  * Definition for a binary tree node.
  * type TreeNode struct {
@@ -14,8 +9,13 @@ import (
  * }
  */
 
+import (
+	"strconv"
+	"strings"
+)
+
 func tree2str(t *TreeNode) string {
-	bs := bytes.Buffer{}
+	bs := strings.Builder{}
 
 	var dfs func(*TreeNode)
 	dfs = func(node *TreeNode) {
