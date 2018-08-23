@@ -1,10 +1,8 @@
 package leetcode0722
 
-import "bytes"
-
 func removeComments(source []string) []string {
 	res := []string{}
-	bs := bytes.Buffer{}
+	bs := []byte{}
 	mode := false
 	for _, s := range source {
 		n := len(s)
@@ -24,12 +22,12 @@ func removeComments(source []string) []string {
 						continue
 					}
 				}
-				bs.WriteByte(s[i])
+				bs = append(bs, s[i])
 			}
 		}
-		if mode == false && bs.Len() != 0 {
-			res = append(res, bs.String())
-			bs = bytes.Buffer{}
+		if mode == false && len(bs) != 0 {
+			res = append(res, string(bs))
+			bs = bs[:0]
 		}
 	}
 	return res
