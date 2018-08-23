@@ -1,9 +1,5 @@
 package leetcode0043
 
-import (
-	"bytes"
-)
-
 func multiply(num1 string, num2 string) string {
 	if num1 == "0" || num2 == "0" {
 		return "0"
@@ -26,9 +22,9 @@ func multiply(num1 string, num2 string) string {
 		product = product[1:]
 	}
 
-	res := bytes.Buffer{}
-	for _, i := range product {
-		res.WriteByte('0' + byte(i))
+	bs := make([]byte, len(product))
+	for i, v := range product {
+		bs[i] = '0' + byte(v)
 	}
-	return res.String()
+	return string(bs)
 }
