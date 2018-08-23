@@ -1,7 +1,5 @@
 package leetcode0014
 
-import "strings"
-
 type trieNode struct {
 	links []*trieNode
 	isEnd bool
@@ -48,16 +46,16 @@ func (t *trie) insert(s string) {
 
 func (t *trie) searchLongestPrefix(s string) string {
 	node := t.root
-	prifix := strings.Builder{}
+	prifix := []byte{}
 	for _, ch := range []byte(s) {
 		if node.containsKey(ch) && node.size == 1 && !node.isEnd {
-			prifix.WriteByte(ch)
+			prifix = append(prifix, ch)
 			node = node.get(ch)
 		} else {
 			break
 		}
 	}
-	return prifix.String()
+	return string(prifix)
 }
 
 func longestCommonPrefix(strs []string) string {
