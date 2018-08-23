@@ -1,38 +1,36 @@
 package leetcode0819
 
-import "bytes"
-
 func mostCommonWord(paragraph string, banned []string) string {
 	count := map[string]int{}
 	m := map[string]struct{}{}
 	for _, b := range banned {
 		m[b] = struct{}{}
 	}
-	bs := bytes.Buffer{}
+	bs := []byte{}
 	for i := 0; i < len(paragraph); i++ {
 		b := paragraph[i]
 		if b >= 'A' && b <= 'Z' || b >= 'a' && b <= 'z' {
 			if b <= 'Z' {
 				b += 32
 			}
-			bs.WriteByte(b)
+			bs = append(bs, b)
 			continue
 		}
-		if bs.Len() == 0 {
+		if len(bs) == 0 {
 			continue
 		}
-		word := bs.String()
+		word := string(bs)
 		if _, ok := m[word]; !ok {
 			count[word]++
 		}
-		bs.Reset()
+		bs = bs[:0]
 	}
-	if bs.Len() != 0 {
-		word := bs.String()
+	if len(bs) != 0 {
+		word := string(bs)
 		if _, ok := m[word]; !ok {
 			count[word]++
 		}
-		bs.Reset()
+		bs = bs[:0]
 	}
 	max := 0
 	res := ""
