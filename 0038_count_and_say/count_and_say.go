@@ -1,7 +1,5 @@
 package leetcode0038
 
-import "strings"
-
 func countAndSay(n int) string {
 	if n == 0 {
 		return ""
@@ -10,18 +8,19 @@ func countAndSay(n int) string {
 	if n == 1 {
 		return res
 	}
+	bs := []byte{}
 	for i := 1; i < n; i++ {
-		b := strings.Builder{}
 		for j, count := 0, 1; j < len(res); j++ {
 			if j+1 == len(res) || res[j] != res[j+1] {
-				b.WriteByte(byte(count + '0'))
-				b.WriteByte(res[j])
+				bs = append(bs, byte(count+'0'))
+				bs = append(bs, res[j])
 				count = 1
 			} else {
 				count++
 			}
 		}
-		res = b.String()
+		res = string(bs)
+		bs = bs[:0]
 	}
 	return res
 }
