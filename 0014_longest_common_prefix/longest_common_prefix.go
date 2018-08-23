@@ -1,8 +1,6 @@
 package leetcode0014
 
-import (
-	"bytes"
-)
+import "strings"
 
 type trieNode struct {
 	links []*trieNode
@@ -50,7 +48,7 @@ func (t *trie) insert(s string) {
 
 func (t *trie) searchLongestPrefix(s string) string {
 	node := t.root
-	prifix := bytes.Buffer{}
+	prifix := strings.Builder{}
 	for _, ch := range []byte(s) {
 		if node.containsKey(ch) && node.size == 1 && !node.isEnd {
 			prifix.WriteByte(ch)
