@@ -1,9 +1,5 @@
 package leetcode0423
 
-import (
-	"bytes"
-)
-
 func originalDigits(s string) string {
 	n := len(s)
 	if n == 0 {
@@ -41,12 +37,12 @@ func originalDigits(s string) string {
 	m[1] -= m[2] + m[0] + m[4]
 	m[9] -= m[5] + m[6] + m[8]
 
-	res := bytes.Buffer{}
+	bs := []byte{}
 	for i := 0; i < 10; i++ {
 		for m[i] > 0 {
-			res.WriteByte(byte(i) + '0')
+			bs = append(bs, byte(i)+'0')
 			m[i]--
 		}
 	}
-	return res.String()
+	return string(bs)
 }
