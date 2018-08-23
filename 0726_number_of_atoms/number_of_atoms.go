@@ -1,9 +1,9 @@
 package leetcode0726
 
 import (
-	"bytes"
 	"sort"
 	"strconv"
+	"strings"
 )
 
 func countOfAtoms(formula string) string {
@@ -49,7 +49,7 @@ func countOfAtoms(formula string) string {
 			m[atom] += val
 		}
 	}
-	bs := bytes.Buffer{}
+	bs := strings.Builder{}
 	atoms := make([]string, 0, len(m))
 	for atom := range m {
 		atoms = append(atoms, atom)
