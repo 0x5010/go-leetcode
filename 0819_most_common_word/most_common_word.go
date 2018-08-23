@@ -1,29 +1,45 @@
 package leetcode0819
 
-import (
-	"regexp"
-	"strings"
-)
+import "bytes"
 
 func mostCommonWord(paragraph string, banned []string) string {
-	reg := regexp.MustCompile("[^a-z ]+")
-	paragraph = reg.ReplaceAllString(strings.ToLower(paragraph), "")
-	ss := strings.Fields(paragraph)
+	count := map[string]int{}
 	m := map[string]struct{}{}
 	for _, b := range banned {
 		m[b] = struct{}{}
 	}
-	count := map[string]int{}
-	max := 0
-	res := ""
-	for _, s := range ss {
-		if _, ok := m[s]; ok {
+	bs := bytes.Buffer{}
+	for i := 0; i < len(paragraph); i++ {
+		b := paragraph[i]
+		if b >= 'A' && b <= 'Z' || b >= 'a' && b <= 'z' {
+			if b <= 'Z' {
+				b += 32
+			}
+			bs.WriteByte(b)
 			continue
 		}
-		count[s]++
-		if count[s] > max {
-			max = count[s]
-			res = s
+		if bs.Len() == 0 {
+			continue
+		}
+		word := bs.String()
+		if _, ok := m[word]; !ok {
+			count[word]++
+		}
+		bs.Reset()
+	}
+	if bs.Len() != 0 {
+		word := bs.String()
+		if _, ok := m[word]; !ok {
+			count[word]++
+		}
+		bs.Reset()
+	}
+	max := 0
+	res := ""
+	for word, c := range count {
+		if c > max {
+			max = c
+			res = word
 		}
 	}
 	return res
