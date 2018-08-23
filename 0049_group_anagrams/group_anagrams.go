@@ -1,9 +1,5 @@
 package leetcode0049
 
-import (
-	"bytes"
-)
-
 func groupAnagrams(strs []string) [][]string {
 	if len(strs) == 0 {
 		return nil
@@ -15,12 +11,12 @@ func groupAnagrams(strs []string) [][]string {
 			count[b-'a']++
 		}
 
-		b := bytes.Buffer{}
-		for _, i := range count {
-			b.WriteByte('#')
-			b.WriteByte(byte(i) + '0')
+		bs := make([]byte, 26*2)
+		for i, c := range count {
+			bs[2*i] = '#'
+			bs[2*i+1] = byte(c) + '0'
 		}
-		key := b.String()
+		key := string(bs)
 		r[key] = append(r[key], str)
 	}
 	res := make([][]string, len(r))
