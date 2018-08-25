@@ -6,18 +6,29 @@ func numFactoredBinaryTrees(A []int) int {
 	mod := 1000000007
 	n := len(A)
 	sort.Ints(A)
-	dp := make(map[int]int, n)
-	for i, a := range A {
-		dp[a] = 1
-		for j := 0; j < i; j++ {
-			if a%A[j] == 0 && dp[a/A[j]] != 0 {
-				dp[a] += dp[A[j]] * dp[a/A[j]]
+	dp := make([]int, n)
+	dp[0] = 1
+	res := 1
+	for i := 1; i < n; i++ {
+		c := 1
+		for j, k := 0, i-1; j <= k; {
+			jk := A[j] * A[k]
+			if jk == A[i] {
+				p := dp[j] * dp[k]
+				if j != k {
+					p += p
+				}
+				c += p
+				j++
+				k--
+			} else if jk < A[i] {
+				j++
+			} else {
+				k--
 			}
 		}
-	}
-	res := 0
-	for _, v := range dp {
-		res += v
+		dp[i] = c
+		res += c
 	}
 	return res % mod
 }
