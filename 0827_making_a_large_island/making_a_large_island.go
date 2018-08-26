@@ -36,26 +36,22 @@ func largestIsland(grid [][]int) int {
 		}
 	}
 
-	getSum := func(i, j int) int {
-		sum := 1
-		flag := map[int]bool{}
-		for _, dir := range dirs {
-			x, y := i+dir[0], j+dir[1]
-			if x >= 0 && x < n && y >= 0 && y < n {
-				flag[area[x][y]] = true
-			}
-		}
-		for index := range flag {
-			sum += m[index]
-		}
-		return sum
-	}
 	res := 1
 	for i := 0; i < n; i++ {
 		for j := 0; j < n; j++ {
 			sum := m[area[i][j]]
-			if sum < 1 {
-				sum = getSum(i, j)
+			if sum == 0 {
+				sum = 1
+				flag := map[int]bool{}
+				for _, dir := range dirs {
+					x, y := i+dir[0], j+dir[1]
+					if x >= 0 && x < n && y >= 0 && y < n {
+						flag[area[x][y]] = true
+					}
+				}
+				for index := range flag {
+					sum += m[index]
+				}
 			}
 			if res < sum {
 				res = sum
