@@ -1,4 +1,4 @@
-package leetcode0842
+package leetcode0843
 
 /**
  * // This is the Master's API interface.

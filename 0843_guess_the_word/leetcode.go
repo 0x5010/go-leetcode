@@ -1,4 +1,4 @@
-package leetcode0842
+package leetcode0843
 
 type Master struct{}
 
