@@ -9,9 +9,9 @@ func shortestPathLength(graph [][]int) int {
 	queue := [][2]int{}
 	dp := make([][]int, n)
 
-	for i := range dp {
+	for i := 0; i < n; i++ {
 		dp[i] = make([]int, maskSize)
-		for j := range dp[i] {
+		for j := 0; j < maskSize; j++ {
 			dp[i][j] = math.MaxInt32
 		}
 		mask := 1 << uint(i)
