@@ -1,11 +1,9 @@
 package leetcode0864
 
-import "fmt"
-
 func shortestPathAllKeys(grid []string) int {
 	m, n := len(grid), len(grid[0])
 	keys := 0
-	visited := map[string]struct{}{}
+	visited := map[entry]struct{}{}
 	queue := []*entry{}
 	for i := 0; i < m; i++ {
 		for j := 0; j < n; j++ {
@@ -17,7 +15,7 @@ func shortestPathAllKeys(grid []string) int {
 					x: i,
 					y: j,
 				}
-				visited[e.String()] = struct{}{}
+				visited[*e] = struct{}{}
 				queue = append(queue, e)
 			}
 		}
@@ -50,10 +48,10 @@ func shortestPathAllKeys(grid []string) int {
 					y:    y,
 					keys: ks,
 				}
-				if _, ok := visited[next.String()]; ok {
+				if _, ok := visited[*next]; ok {
 					continue
 				}
-				visited[next.String()] = struct{}{}
+				visited[*next] = struct{}{}
 				queue = append(queue, next)
 			}
 		}
@@ -65,8 +63,4 @@ func shortestPathAllKeys(grid []string) int {
 
 type entry struct {
 	x, y, keys int
-}
-
-func (e *entry) String() string {
-	return fmt.Sprintf("%d %d %d", e.x, e.y, e.keys)
 }
