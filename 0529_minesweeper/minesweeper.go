@@ -18,8 +18,8 @@ func updateBoard(board [][]byte, click []int) [][]byte {
 	var dfs func(int, int)
 	dfs = func(x, y int) {
 		count := 0
-		for _, d := range dirs {
-			r, c := x+d[0], y+d[1]
+		for _, dir := range dirs {
+			r, c := x+dir[0], y+dir[1]
 			if r < 0 || r >= m || c < 0 || c >= n {
 				continue
 			}
@@ -34,8 +34,8 @@ func updateBoard(board [][]byte, click []int) [][]byte {
 		}
 
 		board[x][y] = 'B'
-		for _, d := range dirs {
-			r, c := x+d[0], y+d[1]
+		for _, dir := range dirs {
+			r, c := x+dir[0], y+dir[1]
 			if r < 0 || r >= m || c < 0 || c >= n {
 				continue
 			}
