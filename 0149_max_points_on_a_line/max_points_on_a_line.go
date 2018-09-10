@@ -8,16 +8,35 @@ package leetcode0149
  * }
  */
 
+func maxPoints(points []Point) int {
+	res := 0
+	for i := 0; i < len(points); i++ {
+		lines := map[Line]int{}
+		overlap := 0
+		count := 0
+
+		for j := i + 1; j < len(points); j++ {
+			l := reduceSegment(points[i], points[j])
+			if l.a == 0 && l.b == 0 {
+				overlap++
+			} else {
+				lines[l]++
+				if count < lines[l] {
+					count = lines[l]
+				}
+			}
+		}
+		count += overlap + 1
+		if count > res {
+			res = count
+		}
+	}
+	return res
+}
+
 type Line struct {
 	a int
 	b int
-}
-
-func gcd(a, b int) int {
-	if b == 0 {
-		return a
-	}
-	return gcd(b, a%b)
 }
 
 func reduceSegment(p1, p2 Point) Line {
@@ -36,28 +55,9 @@ func reduceSegment(p1, p2 Point) Line {
 	return Line{a, b}
 }
 
-func maxPoints(points []Point) int {
-	max := 0
-	for i := 0; i < len(points); i++ {
-		lines := map[Line]int{}
-		overlap := 0
-		count := 0
-
-		for j := i + 1; j < len(points); j++ {
-			l := reduceSegment(points[i], points[j])
-			if l.a == 0 && l.b == 0 {
-				overlap++
-			} else {
-				lines[l]++
-				if count < lines[l] {
-					count = lines[l]
-				}
-			}
-		}
-		count += overlap + 1
-		if count > max {
-			max = count
-		}
+func gcd(a, b int) int {
+	if b == 0 {
+		return a
 	}
-	return max
+	return gcd(b, a%b)
 }
