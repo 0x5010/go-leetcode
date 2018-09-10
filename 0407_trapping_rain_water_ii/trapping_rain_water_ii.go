@@ -36,8 +36,8 @@ func trapRainWater(heightMap [][]int) int {
 	res := 0
 	for len(ch) > 0 {
 		c := heap.Pop(&ch).(cell)
-		for _, d := range dirs {
-			i, j := c.r+d[0], c.c+d[1]
+		for _, dir := range dirs {
+			i, j := c.r+dir[0], c.c+dir[1]
 
 			if 0 <= i && i < m && 0 <= j && j < n && !visited[i][j] {
 				visited[i][j] = true
