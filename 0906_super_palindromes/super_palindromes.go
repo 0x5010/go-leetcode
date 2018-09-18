@@ -6,40 +6,52 @@ import (
 )
 
 func superpalindromesInRange(L string, R string) int {
-	l, _ := strconv.Atoi(L)
-	r, _ := strconv.Atoi(R)
+	l, _ := strconv.ParseInt(L, 10, 0)
+	r, _ := strconv.ParseInt(R, 10, 0)
 
-	left := int(math.Floor(math.Sqrt(float64(l))))
-	right := int(math.Ceil(math.Sqrt(float64(r))))
+	left := int(math.Sqrt(float64(l)))
+	right := int(math.Sqrt(float64(r)))
 
 	res := 0
-	for i := left; i < right; {
-		p := nextP(i)
-		if p <= right && isP(p*p) {
-			res++
+L:
+	for n := 1; n < 19; n++ {
+		for _, p := range genP(n)[1:] {
+			if p < left {
+				continue
+			}
+			if p > right {
+				break L
+			}
+			if isP(p * p) {
+				res++
+			}
 		}
-		i = p + 1
 	}
 	return res
 }
 
-func nextP(i int) int {
-	s := strconv.Itoa(i)
-	n := len(s)
-	h := s[:(n+1)/2]
-	tmp, _ := strconv.Atoi(h)
-	nh := strconv.Itoa(tmp + 1)
-	p1, _ := strconv.Atoi(h[:n/2] + reverseString(h[:n/2]))
-	p2, _ := strconv.Atoi(nh[:n/2] + reverseString(nh[:n/2]))
-	cands := []int{int(math.Pow10(n) - 1), p1, p2}
-
-	p := math.MaxInt32
-	for _, c := range cands {
-		if c >= i && i < p {
-			p = i
+func genP(n int) []int {
+	if n == 0 {
+		return nil
+	}
+	if n == 1 {
+		return []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+	}
+	if n == 2 {
+		return []int{0, 11, 22, 33, 44, 55, 66, 77, 88, 99}
+	}
+	sub := genP(n - 2)
+	res := []int{}
+	for i := 0; i < 10; i++ {
+		for _, s := range sub {
+			r := i
+			for j := 0; j < n-1; j++ {
+				r *= 10
+			}
+			res = append(res, r+s*10+i)
 		}
 	}
-	return p
+	return res
 }
 
 func isP(i int) bool {
@@ -53,36 +65,4 @@ func isP(i int) bool {
 		r--
 	}
 	return true
-}
-
-func reverseString(s string) string {
-	bs, i, j := []byte(s), 0, len(s)-1
-	for i < j {
-		bs[i], bs[j] = bs[j], bs[i]
-		i++
-		j--
-	}
-	return string(bs)
-}
-
-func mySqrt(x int) int {
-	if x <= 1 {
-		return x
-	}
-
-	low := 1
-	high := x
-	for low < high {
-		mid := (low + high) / 2
-		sq := mid * mid
-		if sq > x {
-			high = mid
-		} else if sq < x {
-			low = mid + 1
-		} else {
-			return mid
-		}
-	}
-
-	return high - 1
 }
