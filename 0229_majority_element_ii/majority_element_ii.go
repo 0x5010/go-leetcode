@@ -16,22 +16,21 @@ func majorityElement(nums []int) []int {
 			count2--
 		}
 	}
+
+	count1, count2 = 0, 0
+	for _, num := range nums {
+		if num == candidate1 {
+			count1++
+		} else if num == candidate2 {
+			count2++
+		}
+	}
 	res := []int{}
-	if majority(nums, candidate1) {
+	if count1 > len(nums)/3 {
 		res = append(res, candidate1)
 	}
-	if majority(nums, candidate2) {
+	if count2 > len(nums)/3 {
 		res = append(res, candidate2)
 	}
 	return res
-}
-
-func majority(nums []int, num int) bool {
-	count := 0
-	for _, n := range nums {
-		if n == num {
-			count++
-		}
-	}
-	return count > len(nums)/3
 }
