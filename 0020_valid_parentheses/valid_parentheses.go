@@ -1,41 +1,30 @@
 package leetcode0020
 
-var match = map[rune]rune{
-	')': '(',
-	']': '[',
-	'}': '{',
-}
-
-type stack []rune
-
-func (s *stack) push(r rune) {
-	*s = append(*s, r)
-}
-
-func (s *stack) pop() (rune, bool) {
-	if len(*s) > 0 {
-		res := (*s)[len(*s)-1]
-		*s = (*s)[:len(*s)-1]
-		return res, true
-	}
-	return 0, false
-}
-
 func isValid(s string) bool {
-	st := new(stack)
-	for _, r := range s {
-		switch r {
+	n := len(s)
+
+	match := map[byte]byte{
+		')': '(',
+		']': '[',
+		'}': '{',
+	}
+
+	stack := []byte{}
+
+	for i := 0; i < n; i++ {
+		switch s[i] {
 		case '(', '[', '{':
-			st.push(r)
+			stack = append(stack, s[i])
 		case ')', ']', '}':
-			if m, ok := st.pop(); !ok || m != match[r] {
+			if len(stack) == 0 {
+				return false
+			}
+			m := stack[len(stack)-1]
+			stack = stack[:len(stack)-1]
+			if m != match[s[i]] {
 				return false
 			}
 		}
 	}
-
-	if len(*st) > 0 {
-		return false
-	}
-	return true
+	return len(stack) == 0
 }
