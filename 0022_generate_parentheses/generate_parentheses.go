@@ -1,17 +1,17 @@
 package leetcode0022
 
 func generateParenthesis(n int) []string {
-	res := []string{}
-	if n == 0 {
-		res = append(res, "")
-	} else {
-		for i := 0; i < n; i++ {
-			for _, l := range generateParenthesis(i) {
-				for _, r := range generateParenthesis(n - i - 1) {
-					res = append(res, "("+l+")"+r)
+	dp := make([][]string, n+1)
+	dp[0] = []string{""}
+	dp[1] = []string{"()"}
+	for i := 2; i <= n; i++ {
+		for j := i - 1; j >= 0; j-- {
+			for _, l := range dp[j] {
+				for _, r := range dp[i-j-1] {
+					dp[i] = append(dp[i], "("+l+")"+r)
 				}
 			}
 		}
 	}
-	return res
+	return dp[n]
 }
