@@ -1,27 +1,23 @@
 package leetcode0005
 
-func expandAroundCenter(s string, left, right int) int {
-	L, R := left, right
-	for L >= 0 && R < len(s) && s[L] == s[R] {
-		L--
-		R++
-	}
-	return R - L - 1
-}
-
 func longestPalindrome(s string) string {
-	start, end := 0, 0
-	for i := range s {
-		len1 := expandAroundCenter(s, i, i)
-		len2 := expandAroundCenter(s, i, i+1)
-		l := len1
-		if len2 > l {
-			l = len2
+	n := len(s)
+	max, start := 0, 0
+	for i := 0; i < n; {
+		l, r := i, i
+		for r < (n-1) && s[r] == s[r+1] {
+			r++
 		}
-		if l > end-start {
-			start = i - (l-1)/2
-			end = i + l/2
+		i = r + 1
+		for l > 0 && r < n-1 && s[l-1] == s[r+1] {
+			l--
+			r++
+		}
+		tmp := r - l + 1
+		if tmp > max {
+			max = tmp
+			start = l
 		}
 	}
-	return s[start : end+1]
+	return s[start : start+max]
 }
