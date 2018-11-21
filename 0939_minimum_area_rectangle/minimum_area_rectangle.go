@@ -25,7 +25,7 @@ func minAreaRect(points [][]int) int {
 		for _, point := range points {
 			p[point[1]] = append(p[point[1]], point[0])
 		}
-		xs = ys
+		xs, nx = ys, ny
 	}
 	xl := make([]int, 0, nx)
 	for x := range xs {
