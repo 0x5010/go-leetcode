@@ -13,8 +13,8 @@ func compute(s string) float64 {
 	i := strings.Index(s, "(")
 	if i != -1 {
 		base := s[:i]
-		rep := s[i+1:]
-		for j := 0; j < 20; j++ {
+		rep := s[i+1 : len(s)-1]
+		for j := 0; j < 17/(len(rep))+1; j++ {
 			base += rep
 		}
 		s = base
