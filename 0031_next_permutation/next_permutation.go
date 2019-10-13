@@ -1,31 +1,37 @@
 package leetcode0031
 
-import (
-	"sort"
-)
-
 func nextPermutation(nums []int) {
-	l := len(nums)
-
-	if l <= 1 {
+	if len(nums) < 2 {
 		return
 	}
+	reverse := func(start, end int) {
+		for start < end {
+			nums[start], nums[end] = nums[end], nums[start]
+			start++
+			end--
+		}
+	}
 
-	i := 0
-	for i = l - 1; i >= 1; i-- {
-		if nums[i] > nums[i-1] {
+	p := -1
+	for i := len(nums) - 2; i >= 0; i-- {
+		if nums[i] < nums[i+1] {
+			p = i
 			break
 		}
 	}
 
-	if i > 0 {
-		sort.Ints(nums[i:])
-		for j := i - 1; j < l; j++ {
-			if nums[j] > nums[i-1] {
-				nums[i-1], nums[j] = nums[j], nums[i-1]
-				return
-			}
+	if p == -1 {
+		reverse(0, len(nums)-1)
+		return
+	}
+	nextP := 0
+	for i := len(nums) - 1; i >= 0; i-- {
+		if nums[i] > nums[p] {
+			nextP = i
+			break
 		}
 	}
-	sort.Ints(nums)
+	nums[p], nums[nextP] = nums[nextP], nums[p]
+
+	reverse(p+1, len(nums)-1)
 }
