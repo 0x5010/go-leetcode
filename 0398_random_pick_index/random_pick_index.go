@@ -3,19 +3,25 @@ package leetcode0398
 import "math/rand"
 
 type Solution struct {
-	m map[int][]int
+	nums []int
 }
 
 func Constructor(nums []int) Solution {
-	m := make(map[int][]int)
-	for i, num := range nums {
-		m[num] = append(m[num], i)
-	}
-	return Solution{m: m}
+	return Solution{nums: nums}
 }
 
 func (this *Solution) Pick(target int) int {
-	return this.m[target][rand.Intn(len(this.m[target]))]
+	res := -1
+	count := 0
+	for i, num := range this.nums {
+		if num == target {
+			count++
+			if rand.Intn(count) == 0 {
+				res = i
+			}
+		}
+	}
+	return res
 }
 
 /**
